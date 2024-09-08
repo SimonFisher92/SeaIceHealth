@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 links = generate_links(
     root="https://data.seaice.uni-bremen.de/amsr2/asi_daygrid_swath/n3125/",
-    months = ['aug'],
+    months = ['jun','jul','aug'],
     years=['2013', '2014', '2015', '2016', '2017', '2018', '2019',
               '2020', '2021', '2022', '2023', '2024'],
     today=datetime.date.today()

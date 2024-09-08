@@ -103,7 +103,6 @@ if __name__ == '__main__':
     file_path = os.path.join(data_dir, os.listdir(data_dir)[2])
     test_ = HealthIndex(file_path)
     test_array = test_.get_array()
-
     test_dict = run_fragmentation(test_array, plot=True)
 
     return_dicts = []
@@ -130,16 +129,16 @@ if __name__ == '__main__':
     df_deltas = pd.DataFrame(deltas, columns=['one_day', 'three_day', 'five_day'])
 
     #smooth out the data
-    df_deltas['one_day'] = df_deltas['one_day'].rolling(window=5).mean()
+    df_deltas['fragmentation_mobility'] = df_deltas['one_day'].rolling(window=5).mean()
 
     df_deltas['date'] = dates
 
-    plt.figure(figsize=(13, 7))
-    sns.lineplot(data=df_deltas, x='date', y='one_day', label='One Day Delta')
+    plt.figure(figsize=(16, 7))
+    sns.lineplot(data=df_deltas, x='date', y='fragmentation_mobility', label='One Day Delta')
     #change y label
     plt.ylabel('5-day Rolling Fragment Mobility')
 
-    plt.xticks(ticks=np.arange(0, len(dates), 31), labels=dates[::31], rotation=45)
+    plt.xticks(ticks=np.arange(0, len(dates), 92), labels=dates[::92], rotation=45)
     plt.tight_layout()
     plt.savefig('lineplot.png', dpi=300)
     plt.show()
@@ -152,6 +151,12 @@ if __name__ == '__main__':
 
     df = pd.DataFrame(df_return_dicts, index=dates)
     df['year'] = df.index.str[:4]
+
+    #add one day deltas to df without it ending up as nan
+    df['fragmentation_mobility'] = df_deltas['fragmentation_mobility'].values.tolist()
+    df_keys.append('fragmentation_mobility')
+
+    print(df)
     #scale data between 0 and 1 for numeric columns
 
     df[df_keys] = (df[df_keys] - df[df_keys].min()) / (df[df_keys].max() - df[df_keys].min())
@@ -175,8 +180,13 @@ if __name__ == '__main__':
     plt.figure(figsize=(13, 7))
     sns.heatmap(df.T, cmap='viridis', cbar=True)
 
+    mid_point = int(92/2)
     #only show 1 xtick per every 31, label derived from 'year', starting at index 15
-    plt.xticks(ticks=np.arange(15, len(df), 31), labels=year[15::31], rotation=0)
+    plt.xticks(ticks=np.arange(mid_point, len(df), 92), labels=year[mid_point::92], rotation=0)
+    #draw vertical red lines ever 92 days
+    for i in range(0, len(df), 92):
+        plt.axvline(i, color='white', linewidth=2)
+    plt.title('June, July, August Fragmentation Indices 2013-2024')
     # Ensure enough space for labels
     plt.tight_layout()
     plt.savefig('heatmap.png', dpi=300)
