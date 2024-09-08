@@ -1,0 +1,13 @@
+beautifulsoup4
+requests
+tqdm
+netCDF4
+h5py
+scikit-image
+matplotlib
+numpy
+opencv-python
+imageio
+pandas
+seaborn
+jupyter
