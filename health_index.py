@@ -1,4 +1,3 @@
-# This is a sample Python script.
 import os
 
 import imageio
@@ -98,7 +97,6 @@ class HealthIndex:
 
         return data
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     file_path = os.path.join(data_dir, os.listdir(data_dir)[2])
     test_ = HealthIndex(file_path)
