@@ -1,4 +1,4 @@
-Contents
+### Sea Ice Health
 
 - 1 Introduction
 - 2 Installation
@@ -7,7 +7,7 @@ Contents
 - 5 Acknowledgements
 - 6 Contact
 
-Introduction
+### Introduction
 
 This codebase should allow users to generate heuristics on ice health other than the traditional ones of area, 
 and volume. The codebase is written in Python. This is very much a work in progress and focuses on the class HealthIndex
@@ -15,7 +15,7 @@ upon which uses should iteratively build components to generate their own heuris
 
 I have started here with fragmentation.
 
-Installation
+### Installation
 
 To install the codebase, clone the repository and install the requirements as listed in requirements.txt. As a user,
 you should first create a virtual environment and then install the requirements by the following command in terminal.
@@ -29,7 +29,7 @@ conda activate seaicehealth
 pip install -r requirements.txt
 ```
 
-Usage
+### Usage
 
 First begin with the download_data.py script. This will download all requested data at 3.125 km resolution in .nc format.
 You can tweak requested data by changing the arguments to the generate_links function (see top of download_data.py). The data
@@ -42,6 +42,14 @@ predominant open water.
 Again, this is a work in progress. Probably the most useful function currently is the data
 downloader.
 
-License
+### License
 
 This code is licensed under the MIT License for full open source use including commercial use.
+
+### Acknowledgements
+
+Users on the Arctic Sea Ice Forum, namely Kassy, John_the_Younger, Bruce Steele and uniquorn.
+
+### Contact
+
+Github messages preferred.
